@@ -142,6 +142,13 @@ sections.forEach((section, index) => {
     // Observa cada seção para aplicar a animação
     sections.forEach((section) => observer.observe(section));
 
+   // ========================= BOTÃO DE VOLTAR AO TOPO ====================
+    // Adiciona um evento de clique ao botão de voltar ao topo
+    document.querySelector('.top a').addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' }); // Rola suavemente para o topo da página
+    }); // Professor valmir, não está rolando suavemente e o código está identico
+
 // ================= CARROSSEL DE PROJETOS =================
 // Seleciona os elementos do carrossel
 const carouselSlides = document.querySelector('.carousel-slides');
@@ -222,5 +229,3 @@ carouselSlides.parentElement.addEventListener('mouseenter', () => {
 
 // Retoma a transição automática ao remover o mouse do carrossel
 carouselSlides.parentElement.addEventListener('mouseleave', startAutoSlide);
-
-   
