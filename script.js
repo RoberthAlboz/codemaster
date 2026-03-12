@@ -155,7 +155,6 @@ const carouselSlides = document.querySelector('.carousel-slides');
 const slides = document.querySelectorAll('.carousel-slide');
 const prevButton = document.querySelector('.carousel-button.prev');
 const nextButton = document.querySelector('.carousel-button.next');
-
 let currentSlide = 0;
 let autoSlideInterval;
 
@@ -174,7 +173,6 @@ function showSlide(slideIndex) {
     // Exibe o slide atual
     slides[currentSlide].classList.add('active');
     slides[currentSlide].style.display = 'flex';
-
     updateSlidePosition();
 }
 
@@ -229,3 +227,30 @@ carouselSlides.parentElement.addEventListener('mouseenter', () => {
 
 // Retoma a transição automática ao remover o mouse do carrossel
 carouselSlides.parentElement.addEventListener('mouseleave', startAutoSlide);
+
+// ================= FORMULÁRIO DE CONTATO =================
+// Seleciona o formulário de contato e a mensagem de agradecimento
+const contactForm = document.getElementById('contactForm');
+const thankYouMessage = document.getElementById('thankYouMessage');
+
+// Adiciona um evento de envio ao formulário
+contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    thankYouMessage.style.display = 'block'; // Exibe a mensagem de agradecimento
+
+    // Envia os dados do formulário usando Fetch API
+    const formData = new FormData(contactForm);
+    fetch(contactForm.action, {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(response => {
+        if (response.ok) {
+            setTimeout(() => window.location.reload(), 2000); // Recarrega a página após 2 segundos
+        } else {
+            alert('Erro ao enviar formulário. Tente novamente.');
+         }
+    })
+    .catch(() => alert('Erro na conexão. Tente novamente.'));
+});
